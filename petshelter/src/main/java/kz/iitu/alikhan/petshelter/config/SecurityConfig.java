@@ -26,13 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-//                .antMatchers("/users/issue").hasAuthority("ADMIN")
-//                .antMatchers("/users/return").hasAuthority("ADMIN")
-                .antMatchers("/pet/**").permitAll()
-                .antMatchers("/auth/**", "/users/register", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/**").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/books").permitAll()
-                .antMatchers(HttpMethod.GET, "/authors").permitAll()
+                .antMatchers(HttpMethod.POST, "/pet/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/pet/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/pet/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/pet/**").hasAnyAuthority()
+
+                .antMatchers("/user/adopt").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/auth/**", "/users/register",
+                        "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/**").permitAll()
 
                 .anyRequest().authenticated()
                 .and()

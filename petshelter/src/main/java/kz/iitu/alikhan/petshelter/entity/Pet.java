@@ -5,10 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +22,8 @@ public class Pet {
     private double height;
     private int gender;
     private String breed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

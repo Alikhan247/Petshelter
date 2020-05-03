@@ -19,6 +19,41 @@ public class PetService {
         return petRepository.findById(id).get();
     }
 
+    public Pet savePet(Pet pet){
+        return petRepository.save(pet);
+    }
+
+
+    public Pet updatePetWeight(Long id, double weight){
+        Pet pet = petRepository.findById(id).get();
+        pet.setWeight(weight);
+        return petRepository.save(pet);
+    }
+
+    public Pet updatePetName(Long id, String name){
+        Pet pet = petRepository.findById(id).get();
+        pet.setName(name);
+        return petRepository.save(pet);
+    }
+
+    public Pet updatePetHeight(Long id, double height){
+        Pet pet = petRepository.findById(id).get();
+        pet.setHeight(height);
+        return petRepository.save(pet);
+    }
+
+    public Pet updatePetBreed(Long id, String breed){
+        Pet pet = petRepository.findById(id).get();
+        pet.setBreed(breed);
+        return petRepository.save(pet);
+    }
+
+    public Pet updatePetGender(Long id, int gender){
+        Pet pet = petRepository.findById(id).get();
+        pet.setGender(gender);
+        return petRepository.save(pet);
+    }
+
     public List<Pet> showAllPets() {
         return petRepository.findAll();
     }

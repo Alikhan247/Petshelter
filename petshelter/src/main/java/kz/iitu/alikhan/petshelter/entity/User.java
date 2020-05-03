@@ -2,36 +2,43 @@ package kz.iitu.alikhan.petshelter.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Users")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "rentBooks", "roles"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "roles"})
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    private String role;
 
 
     @Column(unique = true)
     private String username;
     private String password;
 
-    public User(String name) {
-        this.name = name;
-    }
 
-    public User() {
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<Pet> pets = new HashSet<>();
+
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
@@ -39,7 +46,7 @@ public class User implements UserDetails {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
-    private List<Role> roles;
+    private Set<Role> roles =  new HashSet<>();
 
 
     @Override

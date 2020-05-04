@@ -17,15 +17,15 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("kz.iitu.alikhan.library.controllers"))
+                .apis(RequestHandlerSelectors.basePackage("kz.iitu.alikhan.petshelter.controller"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo(){
-        return new ApiInfoBuilder().title("EAD library project documentation")
+        return new ApiInfoBuilder().title("EAD endterm project documentation")
                 .description("This project is made during ead course for educational purpose")
-                .version("0.0.10")
+                .version("0.0.6")
                 .build();
     }
 }

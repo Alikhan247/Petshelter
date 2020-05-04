@@ -1,6 +1,7 @@
 package kz.iitu.alikhan.petshelter.service;
 
 import kz.iitu.alikhan.petshelter.entity.Pet;
+import kz.iitu.alikhan.petshelter.exception.PetNotFoundException;
 import kz.iitu.alikhan.petshelter.repository.PetRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,13 @@ import java.util.Optional;
 public class PetService {
    private PetRepository petRepository;
 
-    public Pet findPetById(Long id) {
-        return petRepository.findById(id).get();
+    public Pet findPetById(Long id) throws PetNotFoundException {
+        Pet pet = petRepository.findById(id).orElse(null);
+        System.out.println(pet);
+        if (pet == null) {
+            throw new PetNotFoundException();
+        }
+        return pet;
     }
 
     public Pet savePet(Pet pet){

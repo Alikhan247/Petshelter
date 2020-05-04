@@ -3,6 +3,9 @@ package kz.iitu.alikhan.petshelter.controller;
 
 import io.swagger.annotations.ApiOperation;
 import kz.iitu.alikhan.petshelter.entity.Pet;
+import kz.iitu.alikhan.petshelter.entity.User;
+import kz.iitu.alikhan.petshelter.exception.PetNotFoundException;
+import kz.iitu.alikhan.petshelter.exception.UserNotFoundException;
 import kz.iitu.alikhan.petshelter.service.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +24,20 @@ public class PetController {
         return petService.showAllPets();
     }
 
+    @ApiOperation(value = "Get user with given id", response = User.class)
+    @GetMapping("/{id}")
+    public Pet findUserById(@PathVariable("id") Long id) throws PetNotFoundException {
+        return petService.findPetById(id);
+    }
+
     @ApiOperation(value = "Get specific pet by id", response = List.class)
     @GetMapping("/find/")
-    public Pet findBook(@RequestParam("id") Long id) {
+    public Pet findBook(@RequestParam("id") Long id) throws PetNotFoundException {
         return petService.findPetById(id);
     }
 
     @ApiOperation(value = "Add a new pet to the database", response = List.class)
-    @GetMapping("/newPet/")
+    @PostMapping("/newPet/")
     public Pet save(@RequestBody() Pet pet) {
         return petService.savePet(pet);
     }

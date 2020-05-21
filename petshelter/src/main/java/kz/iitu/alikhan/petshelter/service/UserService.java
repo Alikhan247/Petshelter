@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
-
+//Донат добавить
     public User givePet(Pet pet, User user) {
         Set<Pet> pets = user.getPets();
         pets.add(pet);
@@ -72,6 +72,10 @@ public class UserService implements UserDetailsService {
         pets.remove(pet);
         user.setPets(pets);
         return userRepository.save(user);
+    }
+
+    public User findByUsername(String name) {
+        return userRepository.findByUsername(name);
     }
 
     public BCryptPasswordEncoder passwordEncoder() {

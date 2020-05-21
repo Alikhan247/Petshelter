@@ -37,11 +37,21 @@ public class UserController {
         return user;
     }
 
+    @ApiOperation(value = "Get user with given id", response = User.class)
+    @GetMapping("/name/{username}")
+    public User findUserByUsername(@PathVariable("username") String username) throws UserNotFoundException {
+        User user = userService.findByUsername(username);
+        if (user == null){
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
 
     @ApiOperation(value = "Adopt a pet by a user", response = User.class)
     @PostMapping("/adopt")
-    public User adoptPet(@RequestParam("user_id") Long userId, @RequestParam("pet_id") Long petId) throws UserNotFoundException, PetNotFoundException {
-        User user = findUserById(userId);
+    public User adoptPet(@RequestParam("user_name") String userName, @RequestParam("pet_id") Long petId) throws UserNotFoundException, PetNotFoundException {
+        User user = userService.findByUsername(userName);
         Pet pet = petService.findPetById(petId);
         return userService.givePet(pet, user);
     }

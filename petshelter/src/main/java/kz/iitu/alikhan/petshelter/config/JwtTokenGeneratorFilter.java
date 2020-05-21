@@ -70,7 +70,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
                 .claim("authorities", auth.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
-                .setExpiration(new Date(now + 60*60 * 1000))  // in milliseconds
+                .setExpiration(new Date(now + 600*60 * 1000))  // in milliseconds
                 .signWith(SignatureAlgorithm.HS512, "secret-key".getBytes())
                 .compact();
 

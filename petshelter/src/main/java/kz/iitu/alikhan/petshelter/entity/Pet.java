@@ -22,8 +22,9 @@ public class Pet {
     private double height;
     private int gender;
     private String breed;
+    private String img;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }

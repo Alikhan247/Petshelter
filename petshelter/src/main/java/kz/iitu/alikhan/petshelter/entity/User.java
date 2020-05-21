@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private String password;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Pet> pets = new HashSet<>();
 
 

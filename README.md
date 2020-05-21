@@ -16,11 +16,22 @@ In this case:
 
 I simplified project as much as possible.
 
+
+
 # Note:
 This project was updated by following previous labs.
 
 
+# UPD:
 
+Now front-end is available.
+
+Frontend was made with the react framework.
+
+Frontend contains usage of the react redux. with dynamic update.
+
+
+CORS was allowed.
 
 
 

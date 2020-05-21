@@ -30,6 +30,10 @@ Frontend was made with the react framework.
 
 Frontend contains usage of the react redux. with dynamic update.
 
+front location: petshelter -> pets-front.zip
+
+DO:
+(npm install, then npm start)
 
 CORS was allowed.
 
